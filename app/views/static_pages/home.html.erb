@@ -1,0 +1,57 @@
+<h1>Devices</h1>
+<%= $gpio_initialized %>
+
+<!-- check to see if Devices are nil, and if not, display them-->
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Devices</div>
+
+  <!-- Table -->
+  <table class="table">
+    <tr>
+      <td><strong>Device Name</strong></td>
+      <td><strong>Description</strong></td>
+      <td><strong>Function</strong></td>
+      <td><strong>Node ID</strong></td>
+
+    <% if @devices.first != nil %>
+      <%if $gpio_initialized == false%>
+        <% gpio_setup %> 
+        <%= $gpio_initialized = true %>
+      <%end%>
+
+      <%@devices.each do |d|%>
+        <tr>
+          <td><%= d.name%></td>
+          <td><%= d.description%></td>
+          <td><%= d.deviceFunction%></td>
+          <td><%= d.node_id%></td>
+          <td>
+            <%if d.io == 0%>
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  <%=d.name%>
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+
+                  <li><%= link_to 'ON', d.pin_high, remote: true %></li>
+                  <li><%= link_to 'OFF', d.pin_low , remote: true%></li>
+
+                </ul>
+              </div>
+            <%end%>
+
+          </td>
+          <td><%= link_to 'Edit', edit_device_path(d), class: 'btn btn-warning' %></td>
+
+          <td><%= link_to 'Destroy', d, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+        </tr>
+      <%end%>
+    <%end%>
+  </tr>
+  </table>
+</div>
+
+<%= link_to 'New Device', new_device_path, class: 'btn btn-primary' %>

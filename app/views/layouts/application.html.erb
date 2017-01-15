@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GpioTest</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="jumbotron text-center">
+      <h1>Device Test</h1>
+  
+      <p><a class="btn btn-primary btn-lg" href="/static_pages/home" role="button">Home</a></p>
+    </div>
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+  </body>
+</html>
