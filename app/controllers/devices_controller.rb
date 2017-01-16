@@ -1,5 +1,5 @@
 class DevicesController < ApplicationController
-  before_action :set_device, only: [:show, :edit, :update, :destroy]
+  before_action :set_device, only: [:show, :edit, :update, :destroy, :pin_high, :pin_low]
   
 
   require 'rpi_gpio'
@@ -72,12 +72,12 @@ class DevicesController < ApplicationController
 
   def pin_high
     RPi::GPIO.set_high @device.pin
-    puts "Turning pin #{pin} ON"
+    puts "Turning pin #{@device.pin} ON"
   end
 
   def pin_low
     RPi::GPIO.set_low @device.pin
-    puts "Turning pin #{pin} OFF"
+    puts "Turning pin #{@device.pin} OFF"
   end
 
   private
@@ -88,6 +88,6 @@ class DevicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def device_params
-      params.require(:device).permit(:name, :description , :deviceFunction , :node_id, :io, :pin)
+      params.require(:device).permit(:id, :name, :description , :deviceFunction , :node_id, :io, :pin)
     end
 end

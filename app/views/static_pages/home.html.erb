@@ -31,13 +31,13 @@
             <%if d.io == 0%>
               <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  <%=d.name%>
+                  <%=d.name%>, <%= d.id%>
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 
-                  <li><%= link_to 'ON', d.pin_high, remote: true %></li>
-                  <li><%= link_to 'OFF', d.pin_low , remote: true%></li>
+                  <li><%= link_to 'ON', device_pin_high_path(d,:id => d.id), remote: true%></li>
+                  <li><%= link_to 'OFF', device_pin_low_path(d,:id => d.id), remote: true%></li>
 
                 </ul>
               </div>
