@@ -9,6 +9,7 @@ module DevicesHelper
       puts "***devices exist***"
       puts "#{$gpio_initialized}"
       puts "#{@devices.first.io}"
+      puts "Pi initialized"
       @devices.each do |d|
         if d.io == 1
           RPi::GPIO.setup d.pin, :as => :input
