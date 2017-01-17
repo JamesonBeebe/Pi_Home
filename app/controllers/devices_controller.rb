@@ -3,6 +3,7 @@ class DevicesController < ApplicationController
   
 
   require 'rpi_gpio'
+  require 'serialport'
   # GET /devices
   # GET /devices.json
   helper DevicesHelper
@@ -80,6 +81,12 @@ class DevicesController < ApplicationController
     puts "Turning pin #{@device.pin} OFF"
   end
 
+  def serial_out
+    text = params[:serial_text]
+    $ser.write "#{text}"
+    puts "Sending #{text} command to UART0"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_device
@@ -88,6 +95,6 @@ class DevicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def device_params
-      params.require(:device).permit(:id, :name, :description , :deviceFunction , :node_id, :io, :pin)
+      params.require(:device).permit(:id, :name, :description , :deviceFunction , :node_id, :io, :pin, :serial_text)
     end
 end

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :devices do
     get 'pin_high', to: 'devices#pin_high'
     get 'pin_low', to: 'devices#pin_low'
+    get 'serial_out', to: 'devices#serial_out'
   end
 
 

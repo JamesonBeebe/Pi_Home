@@ -38,6 +38,7 @@
 
                   <li><%= link_to 'ON', device_pin_high_path(d,:id => d.id), remote: true%></li>
                   <li><%= link_to 'OFF', device_pin_low_path(d,:id => d.id), remote: true%></li>
+                  <li><%= link_to 'transmit', device_serial_out_path(d, :serial_text => "Hello World"), remote: true%></li>                  
 
                 </ul>
               </div>
