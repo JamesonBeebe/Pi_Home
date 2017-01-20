@@ -82,9 +82,17 @@ class DevicesController < ApplicationController
   end
 
   def serial_out
+    puts "Entering serial_out routine"
     text = params[:serial_text]
-    $ser.write "#{text}"
-    puts "Sending #{text} command to UART0"
+    #puts text.class
+    text = [text].pack('H*')
+    text = text.unpack('C*')
+    text.each_entry do |byte|
+      #puts "BYTE"
+      $ser.write "#{byte.chr}"
+    end 
+    #$ser.write "#{text.each_entry.to_s}"
+    puts "Sending #{text.each_entry do |e| e.to_s end} command to UART0"
   end
 
   private

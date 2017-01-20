@@ -6,7 +6,7 @@ module DevicesHelper
     puts "***entered gpio_setup routine***"
     RPi::GPIO.set_numbering :board
     #@devices.first.name
-    $ser = SerialPort.new("/dev/ttyS0", 57600, 8, 1, SerialPort::NONE)
+    $ser = SerialPort.new("/dev/ttyUSB0", 57600, 8, 1, SerialPort::NONE)
     if @devices.first.id != nil
       puts "***devices exist***"
       puts "#{$gpio_initialized}"

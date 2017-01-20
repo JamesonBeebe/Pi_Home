@@ -29,21 +29,23 @@
           <td><%= d.node_id%></td>
           <td>
             <%if d.io == 0%>
-              <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  <%=d.name%>, <%= d.id%>
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-
-                  <li><%= link_to 'ON', device_pin_high_path(d,:id => d.id), remote: true%></li>
-                  <li><%= link_to 'OFF', device_pin_low_path(d,:id => d.id), remote: true%></li>
-                  <li><%= link_to 'transmit', device_serial_out_path(d, :serial_text => "Hello World"), remote: true%></li>                  
-
-                </ul>
+              <div class="btn-group" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <%=d.name%>, <%= d.id%>
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to 'PIN_ON', device_pin_high_path(d,:id => d.id), remote: true%></li>
+                    <li><%= link_to 'PIN_OFF', device_pin_low_path(d,:id => d.id), remote: true%></li>
+                    <!-- Transmit a Text Command -->
+                    <li><%= link_to 'transmit single hex', device_serial_out_path(d, :serial_text => "55"),  remote: true%></li>
+                    <li><%= link_to 'Light ON', device_serial_out_path(d, :serial_text => "7E001017010013A200406C019F00020244300569"),  remote: true%></li>
+                    <li><%= link_to 'Light OFF', device_serial_out_path(d, :serial_text => "7E001017010013A200406C019F0002024430046A"),  remote: true%></li> 
+                  </ul>
+                </div>
               </div>
             <%end%>
-
           </td>
           <td><%= link_to 'Edit', edit_device_path(d), class: 'btn btn-warning' %></td>
 
