@@ -1,7 +1,12 @@
-<h1>Devices</h1>
-<%= $gpio_initialized %>
-
 <!-- check to see if Devices are nil, and if not, display them-->
+<% if @devices.first != nil %>
+  <%if $gpio_initialized == false%>
+    <% gpio_setup %> 
+  <%end%>
+
+<h1>Devices</h1>
+Device Initialized Status: 
+<%= $gpio_initialized %>
 
 <div class="panel panel-default">
   <!-- Default panel contents -->
@@ -15,11 +20,7 @@
       <td><strong>Function</strong></td>
       <td><strong>Node ID</strong></td>
 
-    <% if @devices.first != nil %>
-      <%if $gpio_initialized == false%>
-        <% gpio_setup %> 
-        <%= $gpio_initialized = true %>
-      <%end%>
+
 
       <%@devices.each do |d|%>
         <tr>
@@ -41,7 +42,7 @@
                     <!-- Transmit a Text Command -->
                     <li><%= link_to 'transmit single hex', device_serial_out_path(d, :serial_text => "55"),  remote: true%></li>
                     <li><%= link_to 'Light ON', device_serial_out_path(d, :serial_text => "7E001017010013A200406C019F00020244300569"),  remote: true%></li>
-                    <li><%= link_to 'Light OFF', device_serial_out_path(d, :serial_text => "7E001017010013A200406C019F0002024430046A"),  remote: true%></li> 
+                    <li><%= link_to 'Light OFF', device_serial_out_path(d, :serial_text => "7E001017010013A200406C019F0002024430046A"),  remote: true%></li>
                   </ul>
                 </div>
               </div>

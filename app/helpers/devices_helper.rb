@@ -12,7 +12,6 @@ module DevicesHelper
       puts "#{$gpio_initialized}"
       puts "#{@devices.first.io}"
       puts "Pi initialized"
-      #$ser = SerialPort.new("/dev/ttyAMA0", 9600, 8, 1, SerialPort::NONE)
       @devices.each do |d|
         if d.io == 1
           RPi::GPIO.setup d.pin, :as => :input
@@ -20,6 +19,7 @@ module DevicesHelper
           RPi::GPIO.setup d.pin, :as => :output
         end
       end
+      $gpio_initialized = true
     end
   end
 end
